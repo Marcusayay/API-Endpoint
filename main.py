@@ -23,8 +23,8 @@ def add_record():
 # Example: Retrieve all records
 @app.route('/records', methods=['GET'])
 def get_records():
-    records = list(db.example_collection.find({}, {"_id": 0}))  # Exclude MongoDB's ObjectId
-    return jsonify({"records": records})
+    records = db.records.find()  # Make sure you're using the correct collection name
+    return jsonify({"records": list(records)})  # Convert cursor to a list
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)  # Use 0.0.0.0 for Render compatibility
