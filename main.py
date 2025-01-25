@@ -7,7 +7,7 @@ app = Flask(__name__)
 # MongoDB connection
 MONGODB_URI = os.getenv("MONGODB_URI")  # Get MongoDB URI from environment variable
 client = MongoClient(MONGODB_URI)
-db = client["example_db"]  # Replace with your database name
+db = client["Infected_Devices"]  # Replace with your database name
 
 @app.route('/')
 def home():
