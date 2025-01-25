@@ -15,10 +15,18 @@ def home():
 
 # Example: Create a new record in MongoDB
 @app.route('/add', methods=['POST'])
-def add_record():
-    data = request.json
-    db.example_collection.insert_one(data)
-    return jsonify({"message": "Record added!", "data": data})
+def get_records():
+    # Check if we can connect to the database and fetch records
+    records = db.records.find()  # Ensure this is the correct collection name
+    
+    # Log the number of records fetched for debugging
+    print(f"Found {records.count()} records")  # Make sure you are using the correct count function
+     
+    # Return the data as JSON
+    records_list = list(records)
+    print(f"Records: {records_list}")  # Check the structure of the data
+
+    return jsonify({"records": records_list})
 
 # Example: Retrieve all records
 @app.route('/records', methods=['GET'])
