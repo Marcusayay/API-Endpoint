@@ -1,13 +1,17 @@
 from flask import Flask, jsonify, request
 from pymongo import MongoClient
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
+
 
 # MongoDB connection
 MONGODB_URI = os.getenv("MONGODB_URI")  # Get MongoDB URI from environment variable
 client = MongoClient(MONGODB_URI)
-db = client["Infected_Devices"]  # Replace with your database name
+db = client["Database_Name"]["Infected_Devices"]
+
 
 @app.route('/')
 def home():
@@ -20,15 +24,17 @@ def add_record():
     db.example_collection.insert_one(data)
     return jsonify({"message": "Record added!", "data": data})
 
-# Example: Retrieve all records
+
 @app.route('/records', methods=['GET'])
 def get_records():
-    records = db.records.find()
+    records = db.find()  # Retrieve all records from the correct collection
     records_list = []
     for record in records:
-        record["_id"] = str(record["_id"])
+        record["_id"] = str(record["_id"])  # Convert ObjectId to string
         records_list.append(record)
     return jsonify({"records": records_list})
 
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)  # Use 0.0.0.0 for Render compatibility
+    app.debug = True
+    app.run(host='0.0.0.0', port=9000)  # Use 0.0.0.0 for Render compatibility
