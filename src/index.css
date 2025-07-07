@@ -1,0 +1,25 @@
+/* Figtree Variable Font */
+@font-face {
+  font-family: "Figtree";
+  src: url("/fonts/Figtree-VariableFont_wght.ttf") format("truetype");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/fonts/Figtree-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@import "tailwindcss";
+/* @import "flowbite/src/themes/default"; */
+
+body{
+    font-family: 'Figtree', sans-serif! important;
+}
+
+
